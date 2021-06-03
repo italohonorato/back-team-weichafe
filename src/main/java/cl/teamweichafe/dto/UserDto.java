@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * 
  * @author italohonorato
@@ -22,8 +23,6 @@ public class UserDto implements Serializable {
 	private LocalDateTime createdOn;
 	private String password;
 	private List<RoleDto> roles = new ArrayList<RoleDto>();
-	private AdditionalInfoDto additionalInfo;
-	private List<UserMeasureDto> userMeassures = new ArrayList<UserMeasureDto>();
 
 	public Integer getUserId() {
 		return userId;
@@ -73,20 +72,56 @@ public class UserDto implements Serializable {
 		this.roles = roles;
 	}
 
-	public AdditionalInfoDto getAdditionalInfo() {
-		return additionalInfo;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createdOn == null) ? 0 : createdOn.hashCode());
+		result = prime * result + (enabled ? 1231 : 1237);
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		return result;
 	}
 
-	public void setAdditionalInfo(AdditionalInfoDto additionalInfo) {
-		this.additionalInfo = additionalInfo;
-	}
-
-	public List<UserMeasureDto> getUserMeassures() {
-		return userMeassures;
-	}
-
-	public void setUserMeassures(List<UserMeasureDto> userMeassures) {
-		this.userMeassures = userMeassures;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserDto other = (UserDto) obj;
+		if (createdOn == null) {
+			if (other.createdOn != null)
+				return false;
+		} else if (!createdOn.equals(other.createdOn))
+			return false;
+		if (enabled != other.enabled)
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (roles == null) {
+			if (other.roles != null)
+				return false;
+		} else if (!roles.equals(other.roles))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
 	}
 
 }

@@ -62,8 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http
 		.authorizeRequests()
-		.anyRequest()
-		.authenticated()
+		.antMatchers("/oauth/token", "/oauth/**").permitAll()
+		.antMatchers("/token/revoke").permitAll()
+		.antMatchers("/swagger-ui/").permitAll()
+		.antMatchers("/api/**").authenticated()
+//		.anyRequest()
+//		.authenticated()
 		.and()
 		.httpBasic()
 		.and()

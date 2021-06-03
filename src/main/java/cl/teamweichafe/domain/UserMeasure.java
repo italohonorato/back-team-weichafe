@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users_measures")
 public class UserMeasure implements Serializable {
@@ -26,10 +28,12 @@ public class UserMeasure implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "measure_id")
 	private Measure measures;

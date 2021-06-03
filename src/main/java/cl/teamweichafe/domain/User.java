@@ -24,6 +24,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -48,6 +51,7 @@ public class User implements Serializable {
 	
 	private String password;
 	
+	@JsonManagedReference
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			joinColumns = @JoinColumn(name = "user_id"),
@@ -55,9 +59,11 @@ public class User implements Serializable {
 			uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})})
 	private Set<Role> roles = new HashSet<Role>();
 	
+	@JsonBackReference
 	@OneToOne(mappedBy = "user")
 	private AdditionalInfo additionalInfo;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<UserMeasure> userMeassures = new HashSet<UserMeasure>();
 	
@@ -113,5 +119,17 @@ public class User implements Serializable {
 	
 	public void addUserMeassure(UserMeasure userMeassure) {
 		this.userMeassures.add(userMeassure);
+	}
+
+	public AdditionalInfo getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setAdditionalInfo(AdditionalInfo additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
+	public Set<UserMeasure> getUserMeassures() {
+		return userMeassures;
 	}
 }

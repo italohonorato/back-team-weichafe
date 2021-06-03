@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import cl.teamweichafe.domain.Role;
 import cl.teamweichafe.domain.User;
+import cl.teamweichafe.dto.UserDto;
+import cl.teamweichafe.mapper.FunctionalMapper;
 import cl.teamweichafe.repositories.UserRepository;
 import cl.teamweichafe.services.ICrud;
 import cl.teamweichafe.services.UserService;
