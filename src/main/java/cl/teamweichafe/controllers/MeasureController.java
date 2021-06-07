@@ -1,6 +1,10 @@
 package cl.teamweichafe.controllers;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
@@ -9,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,13 +57,40 @@ public class MeasureController {
 		FunctionalMapper<Measure, MeasureDto> mapper = (classFrom, dto) -> this.modelMapper.map(classFrom, dto);
 		List<Measure> measures = this.measureService.findall();
 		List<MeasureDto> dtos = measures.stream().map(m -> mapper.mapFromTo(m, MeasureDto.class)).collect(Collectors.toList());
+		dtos.forEach(dto ->  {
+			try {
+				Link selfRel = linkTo(methodOn(MeasureController.class).getById(Optional.of(dto.getMeaseurId()))).withSelfRel();
+				dto.add(selfRel);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 		
-		return new ResponseEntity<List<MeasureDto>>(dtos, HttpStatus.ACCEPTED);
+		return new ResponseEntity<List<MeasureDto>>(dtos, HttpStatus.OK);
+	}
+	
+	@RolesAllowed({"ROLE_ADMIN", "ROLE_MEMBER"})
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getById(@PathVariable Optional<Integer> id) throws Exception{
+		
+		FunctionalMapper<Measure, MeasureDto> mapper = (classFrom, dto) -> this.modelMapper.map(classFrom, dto);
+		
+		if(id.isPresent() && id.get() > 0) {
+			Measure measure = this.measureService.findById(id.get());
+			MeasureDto dto = mapper.mapFromTo(measure, MeasureDto.class);
+			Link selfRel = linkTo(MeasureController.class).slash(id.get()).withSelfRel();
+			dto.add(selfRel);
+			
+			return new ResponseEntity<MeasureDto>(dto, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@RolesAllowed({"ROLE_ADMIN"})
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable @NotNull @Min(1) Integer id){
+	public ResponseEntity<?> delete(@PathVariable @NotNull @Min(1) Integer id) throws Exception{
+		this.measureService.deleteById(id);
 		
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}

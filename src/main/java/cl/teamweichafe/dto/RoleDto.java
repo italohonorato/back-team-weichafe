@@ -1,12 +1,14 @@
 package cl.teamweichafe.dto;
 
 import java.io.Serializable;
+
+import org.springframework.hateoas.RepresentationModel;
 /**
  * 
  * @author italohonorato
  *
  */
-public class RoleDto implements Serializable {
+public class RoleDto extends RepresentationModel<RoleDto> implements Serializable {
 
 	/**
 	 * 

@@ -22,7 +22,7 @@ class RoleRepositoryTests {
 	void saveTest() {
 		
 		Role role = new Role();
-		role.setRoleName("MEMBER");
+		role.setRoleName("ROLE_MEMBER");
 		
 		Role roleSaved = this.roleRepo.save(role);
 		
@@ -30,7 +30,7 @@ class RoleRepositoryTests {
 		.isNotNull()
 		.isInstanceOf(Role.class)
 		.hasNoNullFieldsOrPropertiesExcept("users")
-		.hasFieldOrPropertyWithValue("roleName", "MEMBER");
+		.hasFieldOrPropertyWithValue("roleName", "ROLE_MEMBER");
 	}
 
 	@Test

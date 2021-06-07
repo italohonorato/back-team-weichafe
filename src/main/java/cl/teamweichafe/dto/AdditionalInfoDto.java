@@ -3,12 +3,14 @@ package cl.teamweichafe.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import org.springframework.hateoas.RepresentationModel;
+
 /**
  * 
  * @author italohonorato
  *
  */
-public class AdditionalInfoDto implements Serializable {
+public class AdditionalInfoDto extends RepresentationModel<AdditionalInfoDto>implements Serializable {
 
 	/**
 	 * 

@@ -83,6 +83,6 @@ class UserRepositoryTests {
 		.isNotEmpty()
 		.isInstanceOf(List.class)
 		.hasOnlyElementsOfType(User.class)
-		.hasSize(2);
+		.hasSize(3);
 	}
 }

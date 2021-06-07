@@ -3,6 +3,8 @@ package cl.teamweichafe.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import cl.teamweichafe.domain.Assistance;
@@ -11,6 +13,7 @@ import cl.teamweichafe.repositories.AssistanceRepository;
 import cl.teamweichafe.services.AssistanceService;
 
 @Service
+@Transactional
 public class AssistanceServiceImpl implements AssistanceService {
 
 	private AssistanceRepository assistanceRepo;

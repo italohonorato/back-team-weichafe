@@ -3,20 +3,42 @@ package cl.teamweichafe.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.teamweichafe.domain.Level;
+import cl.teamweichafe.dto.LevelDto;
+import cl.teamweichafe.mapper.FunctionalMapper;
 import cl.teamweichafe.repositories.LevelRepository;
-import cl.teamweichafe.services.ICrud;
 import cl.teamweichafe.services.LevelService;
 
 @Service
+@Transactional
 public class LevelServiceImpl implements LevelService {
 	
 	private LevelRepository levelRepo;
+	private ModelMapper modelMapper;
 
-	public LevelServiceImpl(LevelRepository levelRepo) {
+	public LevelServiceImpl(LevelRepository levelRepo, ModelMapper modelMapper) {
 		this.levelRepo = levelRepo;
+		this.modelMapper = modelMapper;
+	}
+	
+	public LevelDto mapToDto(Level entity) {
+		
+		LevelDto dto = this.modelMapper.map(entity, LevelDto.class);
+		
+		return dto;
+	}
+	
+	public Level mapToEntity(LevelDto dto) {
+		
+		Level level = this.modelMapper.map(dto, Level.class);
+		
+		return level;
 	}
 
 	@Override

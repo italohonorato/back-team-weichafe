@@ -13,11 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "measures")
-public class Measure implements Serializable {
+public class Measure extends RepresentationModel<Measure> implements Serializable {
 
 	/**
 	 * 

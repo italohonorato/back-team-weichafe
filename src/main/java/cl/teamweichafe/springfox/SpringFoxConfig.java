@@ -45,7 +45,8 @@ public class SpringFoxConfig {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("cl.teamweichafe.controllers"))
-				.paths(PathSelectors.ant("/api/**"))
+//				.paths(PathSelectors.ant("/api/**"))
+				.paths(PathSelectors.any())
 				.build()
 				.apiInfo(DEFAULT_API_INFO)
 				.securityContexts(Arrays.asList(securityContext()))
@@ -81,6 +82,7 @@ public class SpringFoxConfig {
 								new ResponseBuilder().code("400").description("Bad Request").build(),
 								new ResponseBuilder().code("401").description("Request unauthorized, authentication required").build(),
 								new ResponseBuilder().code("403").description("Forbidden").build(),
+								new ResponseBuilder().code("409").description("Request could not be completed due to a conflict with the current state of the resource").build(),
 								new ResponseBuilder().code("500").description("An Internal Server Error has ocurred").build()));
 	}
 

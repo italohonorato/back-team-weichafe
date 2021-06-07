@@ -9,9 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Entity
 @Table(name = "levels")
-public class Level implements Serializable {
+public class Level extends RepresentationModel<Level> implements Serializable {
 
 	/**
 	 * 

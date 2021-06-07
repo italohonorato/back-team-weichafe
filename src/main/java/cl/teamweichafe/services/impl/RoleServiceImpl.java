@@ -3,6 +3,8 @@ package cl.teamweichafe.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import cl.teamweichafe.domain.Role;
@@ -10,6 +12,7 @@ import cl.teamweichafe.repositories.RoleRepository;
 import cl.teamweichafe.services.RoleService;
 
 @Service
+@Transactional
 public class RoleServiceImpl implements RoleService {
 	
 	private RoleRepository roleRepo;
@@ -59,6 +62,12 @@ public class RoleServiceImpl implements RoleService {
 		this.roleRepo.deleteById(id);
 		
 		return true;
+	}
+
+	@Override
+	public List<Role> findAllByIds(Iterable<Integer> ids) {
+		
+		return this.roleRepo.findAllById(ids);
 	}
 
 }

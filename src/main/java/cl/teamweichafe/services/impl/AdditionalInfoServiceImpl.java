@@ -3,6 +3,8 @@ package cl.teamweichafe.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import cl.teamweichafe.domain.AdditionalInfo;
@@ -10,6 +12,7 @@ import cl.teamweichafe.repositories.AdditionalInfoRepository;
 import cl.teamweichafe.services.AdditionalInfoService;
 
 @Service
+@Transactional
 public class AdditionalInfoServiceImpl implements AdditionalInfoService {
 	
 	private AdditionalInfoRepository additionalInfoRepo;

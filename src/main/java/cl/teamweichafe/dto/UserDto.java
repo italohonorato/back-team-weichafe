@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.hateoas.RepresentationModel;
+
 /**
  * 
  * @author italohonorato
  *
  */
-public class UserDto implements Serializable {
+public class UserDto extends RepresentationModel<UserDto> implements Serializable {
 
 	/**
 	 * 

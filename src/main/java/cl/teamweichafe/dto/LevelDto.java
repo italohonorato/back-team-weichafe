@@ -2,12 +2,14 @@ package cl.teamweichafe.dto;
 
 import java.io.Serializable;
 
+import org.springframework.hateoas.RepresentationModel;
+
 /**
  * 
  * @author italohonorato
  *
  */
-public class LevelDto implements Serializable {
+public class LevelDto extends RepresentationModel<LevelDto> implements Serializable {
 
 	/**
 	 * 

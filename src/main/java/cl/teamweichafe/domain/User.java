@@ -22,14 +22,23 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.checkerframework.common.value.qual.MinLen;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User extends RepresentationModel<User> implements Serializable {
 
 	/**
 	 * 
@@ -41,6 +50,7 @@ public class User implements Serializable {
 	@Column(name = "user_id")
 	private Integer userId;
 	
+	@NotEmpty
 	@Column(name = "username", unique = true)
 	private String userName;
 	
@@ -49,10 +59,13 @@ public class User implements Serializable {
 	@Column(name = "created_on")
 	private LocalDateTime createdOn;
 	
+	@NotEmpty
+	@MinLen(6)
 	private String password;
 	
+	@NotEmpty
 	@JsonManagedReference
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"),

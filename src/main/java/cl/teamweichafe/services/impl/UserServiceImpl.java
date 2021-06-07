@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,6 +25,7 @@ import cl.teamweichafe.services.ICrud;
 import cl.teamweichafe.services.UserService;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 	
 	private UserRepository userRepo;
@@ -31,6 +34,7 @@ public class UserServiceImpl implements UserService {
 		this.userRepo = userRepo;
 	}
 
+	
 	@Override
 	public User findById(Integer id) throws Exception {
 		

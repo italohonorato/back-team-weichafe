@@ -2,12 +2,16 @@ package cl.teamweichafe.dto;
 
 import java.io.Serializable;
 
+import org.springframework.hateoas.RepresentationModel;
+
+import lombok.Data;
+
 /**
  * 
  * @author italohonorato
  *
  */
-public class MeasureDto implements Serializable {
+public class MeasureDto extends RepresentationModel<MeasureDto> implements Serializable {
 
 	/**
 	 * 
@@ -45,7 +49,7 @@ public class MeasureDto implements Serializable {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((measeurId == null) ? 0 : measeurId.hashCode());
 		result = prime * result + ((measureDesc == null) ? 0 : measureDesc.hashCode());
 		result = prime * result + ((unit == null) ? 0 : unit.hashCode());
@@ -56,7 +60,7 @@ public class MeasureDto implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

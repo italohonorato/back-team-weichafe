@@ -7,9 +7,11 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.RepresentationModel;
+
 @Entity
 @Table(name = "assistances")
-public class Assistance implements Serializable {
+public class Assistance extends RepresentationModel<Assistance> implements Serializable {
 
 	/**
 	 * 

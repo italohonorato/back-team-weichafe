@@ -10,12 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "roles")
-public class Role implements Serializable {
+public class Role extends RepresentationModel<Role> implements Serializable {
 
 	/**
 	 * 
@@ -27,6 +30,7 @@ public class Role implements Serializable {
 	@Column(name = "role_id")
 	private Integer roleId;
 
+	@NotEmpty
 	@Column(name = "rolename", unique = true)
 	private String roleName;
 	
