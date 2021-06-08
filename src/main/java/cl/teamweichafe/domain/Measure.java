@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -31,8 +32,10 @@ public class Measure extends RepresentationModel<Measure> implements Serializabl
 	@Column(name = "measure_id")
 	private Integer measeurId;
 	
+	@NotEmpty
 	private String unit;
 	
+	@NotEmpty
 	@Column(name = "measure_desc")
 	private String measureDesc;
 	

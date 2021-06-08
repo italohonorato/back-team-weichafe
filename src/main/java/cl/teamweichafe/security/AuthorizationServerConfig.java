@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -33,6 +34,30 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	@Qualifier("authenticationManager")
 	private AuthenticationManager authenticationManager;
+	
+	@Value("${authorization.server.client.id}")
+	private String CLIENT_ID;
+	
+	@Value("${authorization.server.client.secret}")
+	private String CLIENT_SECRET;
+	
+	@Value("${authorization.server.client.scope-read}")
+	private String SCOPE_READ;
+	
+	@Value("${authorization.server.client.scope-write}")
+	private String SCOPE_WRITE;
+	
+	@Value("${authorization.server.grant-type-pwd}")
+	private String GRANT_TYPE_PWD;
+	
+	@Value("${authorization.server.grant-type-refresh-token}")
+	private String GRANT_TYPE_REFRESH_TOKEN;
+	
+	@Value("${authorization.server.access-token-validity-seconds}")
+	private int ACCESS_TOKEN_VALIDITY_SECONDS;
+	
+	@Value("${authorization.server.refresh-token-validity-seconds}")
+	private int REFRESH_TOKEN_VALIDITY_SECONDS;
 	
 	@Bean
     @Primary
@@ -86,12 +111,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 		clients
 		.inMemory()
-		.withClient("frontApp")
-		.secret(passwordEncoder.encode("fr4nt1pp"))
-		.scopes("read", "write")
-		.authorizedGrantTypes("password", "refresh_token")
-		.accessTokenValiditySeconds(3600)
-		.refreshTokenValiditySeconds(3600);
+		.withClient(CLIENT_ID)
+		.secret(passwordEncoder.encode(CLIENT_SECRET))
+		.scopes(SCOPE_READ, SCOPE_WRITE)
+		.authorizedGrantTypes(GRANT_TYPE_PWD, GRANT_TYPE_REFRESH_TOKEN)
+		.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)
+		.refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_SECONDS);
 	}
 
 	/**

@@ -28,6 +28,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.checkerframework.common.value.qual.MinLen;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -51,6 +52,7 @@ public class User extends RepresentationModel<User> implements Serializable {
 	private Integer userId;
 	
 	@NotEmpty
+	@Length(min = 4, message = "User name must contain 6 characters at least")
 	@Column(name = "username", unique = true)
 	private String userName;
 	
@@ -60,7 +62,7 @@ public class User extends RepresentationModel<User> implements Serializable {
 	private LocalDateTime createdOn;
 	
 	@NotEmpty
-	@MinLen(6)
+	@Length(min = 6, message = "Password must contain 6 characters at least")
 	private String password;
 	
 	@NotEmpty

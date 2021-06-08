@@ -18,7 +18,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers("/token/revoke").permitAll()
 		.antMatchers("/swagger-ui/**").permitAll()
 		.antMatchers("/api/**").authenticated();
-//		.anyRequest().authenticated();
 	}
 
 }

@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManager() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return super.authenticationManager();
 	}
 	
@@ -66,8 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/token/revoke").permitAll()
 		.antMatchers("/swagger-ui/").permitAll()
 		.antMatchers("/api/**").authenticated()
-//		.anyRequest()
-//		.authenticated()
 		.and()
 		.httpBasic()
 		.and()

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -25,6 +26,7 @@ public class Level extends RepresentationModel<Level> implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer levelId;
 	
+	@NotEmpty
 	@Column(name = "level_name", unique = true)
 	private String levelName;
 	

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -40,6 +41,7 @@ public class AdditionalInfo implements Serializable {
 	@Email(message = "Email should be valid")
 	private String email;
 	
+	@Size(max = 200, message = "Address accept 200 characters at max")
 	private String address;
 	
 	private Integer phone;

@@ -8,8 +8,10 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseBuilder;
@@ -25,6 +27,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
+@Import(BeanValidatorPluginsConfiguration.class)
 public class SpringFoxConfig {
 
 	public static final String AUTHORIZATION_HEADER = "Authorization";
@@ -35,7 +38,7 @@ public class SpringFoxConfig {
 
 	public static final ApiInfo DEFAULT_API_INFO = new ApiInfo("Team Weichafe API",
 			"API to manage useres of the Team Weichafe", 
-			"API TOS", 
+			"V1.0.0", 
 			"Terms of service", DEFAULT_CONTACT,
 			"Licence Apache 2.0", 
 			"http://www.apache.org/licenses/LICENSE-2.0", 
@@ -45,7 +48,6 @@ public class SpringFoxConfig {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("cl.teamweichafe.controllers"))
-//				.paths(PathSelectors.ant("/api/**"))
 				.paths(PathSelectors.any())
 				.build()
 				.apiInfo(DEFAULT_API_INFO)
