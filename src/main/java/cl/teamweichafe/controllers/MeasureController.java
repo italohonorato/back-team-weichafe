@@ -28,6 +28,7 @@ import cl.teamweichafe.domain.Measure;
 import cl.teamweichafe.dto.MeasureDto;
 import cl.teamweichafe.mapper.FunctionalMapper;
 import cl.teamweichafe.services.MeasureService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/measure")
@@ -39,6 +40,7 @@ public class MeasureController {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	@ApiOperation(value = "Endpoint to create a Measure category")
 	@RolesAllowed({"ROLE_ADMIN"})
 	@PostMapping
 	public ResponseEntity<?> add(@RequestBody @NotNull MeasureDto measureDto) {		
@@ -50,6 +52,7 @@ public class MeasureController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Endpoint to retrieve all Measure categories")
 	@RolesAllowed({"ROLE_ADMIN", "ROLE_MEMBER"})
 	@GetMapping
 	public ResponseEntity<List<MeasureDto>> getAll(){
@@ -69,6 +72,7 @@ public class MeasureController {
 		return new ResponseEntity<List<MeasureDto>>(dtos, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Endpoint to retrieve a Measure by its ID")
 	@RolesAllowed({"ROLE_ADMIN", "ROLE_MEMBER"})
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable Optional<Integer> id) throws Exception{
@@ -87,6 +91,7 @@ public class MeasureController {
 		}
 	}
 	
+	@ApiOperation(value = "Endpoint to delete a Measure category by its ID")
 	@RolesAllowed({"ROLE_ADMIN"})
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable @NotNull @Min(1) Integer id) throws Exception{

@@ -32,6 +32,7 @@ import cl.teamweichafe.dto.UserDto;
 import cl.teamweichafe.mapper.UserMapper;
 import cl.teamweichafe.services.RoleService;
 import cl.teamweichafe.services.impl.UserServiceImpl;
+import io.swagger.annotations.ApiOperation;
 /**
  * 
  * @author italohonorato
@@ -57,6 +58,7 @@ public class UserController {
 	@Autowired
 	private ModelMapper mapper;
 	
+	@ApiOperation(value = "Endpoint to retrieve all existing Users")
 	@RolesAllowed({"ROLE_ADMIN", "ROLE_MEMBER"})
 	@GetMapping
 	public ResponseEntity<CollectionModel<UserDto>> getAllUsers(){
@@ -85,6 +87,7 @@ public class UserController {
 		return new ResponseEntity<CollectionModel<UserDto>>(result, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Endpoint to retrieve an existing User by its ID")
 	@RolesAllowed({"ROLE_ADMIN"})
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDto> getById(@PathVariable Integer id) throws Exception{
@@ -97,6 +100,7 @@ public class UserController {
 		return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "Endpoint to create Users")
 	@RolesAllowed({"ROLE_ADMIN"})
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Optional<UserDto> dto){		
@@ -116,6 +120,7 @@ public class UserController {
 		}
 	}
 	
+	@ApiOperation(value = "Endpoint to delete an existing User by its ID")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) throws Exception{
 		this.userService.deleteById(id);		

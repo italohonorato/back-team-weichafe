@@ -23,6 +23,7 @@ import cl.teamweichafe.domain.Level;
 import cl.teamweichafe.dto.LevelDto;
 import cl.teamweichafe.mapper.impl.LevelMapper;
 import cl.teamweichafe.services.LevelService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/level")
@@ -34,6 +35,7 @@ public class LevelController {
 	@Autowired
 	private LevelMapper levelMapper;
 	
+	@ApiOperation(value = "Endpoint to retrieve all level registered")
 	@GetMapping
 	public ResponseEntity<?> getAll(){
 		
@@ -52,6 +54,7 @@ public class LevelController {
 		return new ResponseEntity<List<LevelDto>>(dtos, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Endpoint to retrieve a specific level by its ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable Optional<Integer> id) throws Exception{
 		
@@ -66,6 +69,7 @@ public class LevelController {
 		}		
 	}
 	
+	@ApiOperation(value = "Endpoint to create a level")
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Optional<LevelDto> dto) throws Exception{
 		
@@ -82,6 +86,7 @@ public class LevelController {
 		}
 	}
 	
+	@ApiOperation(value = "Endpoint to update a specific level by its ID")
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@RequestBody Optional<LevelDto> dto, @PathVariable Optional<Integer> id) throws Exception{
 		
@@ -110,6 +115,7 @@ public class LevelController {
 		}
 	}
 	
+	@ApiOperation(value = "Endpoint to delete a specific level by its ID")
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@PathVariable Optional<Integer> id) throws Exception{
 		

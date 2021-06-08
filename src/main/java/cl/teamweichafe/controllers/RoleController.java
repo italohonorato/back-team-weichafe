@@ -26,6 +26,7 @@ import cl.teamweichafe.domain.Role;
 import cl.teamweichafe.dto.RoleDto;
 import cl.teamweichafe.mapper.impl.RoleMapper;
 import cl.teamweichafe.services.RoleService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/role")
@@ -37,6 +38,7 @@ public class RoleController {
 	@Autowired
 	private RoleMapper roleMapper;
 	
+	@ApiOperation(value = "Endpoint to retrieve all existing Roles")
 	@GetMapping
 	public ResponseEntity<?> getAll() {
 		
@@ -55,6 +57,7 @@ public class RoleController {
 		return new ResponseEntity<List<RoleDto>>(rolesDto, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Endpoint to retrieve an existing Roles by its ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getById(@PathVariable @NotNull Integer id) throws Exception {
 		
@@ -66,6 +69,7 @@ public class RoleController {
 		return new ResponseEntity<RoleDto>(roleDto, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Endpoint to create a Role")
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Optional<RoleDto> dto){
 		
@@ -80,6 +84,7 @@ public class RoleController {
 		}
 	}
 	
+	@ApiOperation(value = "Endpoint to delete a Role")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Optional<Integer> id) throws Exception{
 		

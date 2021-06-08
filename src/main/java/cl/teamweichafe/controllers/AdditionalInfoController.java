@@ -23,6 +23,7 @@ import cl.teamweichafe.dto.AdditionalInfoDto;
 import cl.teamweichafe.mapper.impl.AdditionalInfoMapper;
 import cl.teamweichafe.services.AdditionalInfoService;
 import cl.teamweichafe.services.UserService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/additionalInfo")
@@ -37,6 +38,7 @@ public class AdditionalInfoController {
 	@Autowired
 	private AdditionalInfoMapper addInfoMapper;
 	
+	@ApiOperation(value = "Endpoint to add additional user info given an user id")
 	@PostMapping("/{id}")
 	public ResponseEntity<?> addAdditionalInfo(@RequestBody Optional<AdditionalInfoDto> infoDto, @PathVariable Optional<Integer> id) throws Exception{
 		
@@ -57,6 +59,7 @@ public class AdditionalInfoController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
+	@ApiOperation(value = "Endpoint to retrieve additional user info by additional info ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<AdditionalInfoDto> getAdditionalInfo(@PathVariable Integer id) throws Exception{
 		AdditionalInfo addInfo = this.additionalInfoService.findById(id);
@@ -70,6 +73,7 @@ public class AdditionalInfoController {
 		return new ResponseEntity<AdditionalInfoDto>(dto, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Endpoint to update additional user info given an user id")
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@PathVariable Optional<Integer> id, @RequestBody Optional<AdditionalInfoDto> dto) throws Exception{
 		
